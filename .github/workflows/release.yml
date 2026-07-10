@@ -41,6 +41,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip pyinstaller pikepdf
           choco install nsis -y
+          Add-Content $env:GITHUB_PATH 'C:\Program Files (x86)\NSIS'
       - name: Build installer
         shell: cmd
         run: windows\build_installer.bat
