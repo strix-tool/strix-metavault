@@ -10,6 +10,8 @@
 [![Security](https://img.shields.io/badge/security-hardened-success.svg)](SECURITY.md)
 [![Tests](https://img.shields.io/badge/tests-38%20passing-success.svg)](tests/)
 
+![Strix MetaVault - screenshot](docs/screenshot.png)
+
 Strix MetaVault is part of the open-source **[Strix Advanced Tools](https://github.com/strix-tool)**
 suite of privacy & security utilities for Windows and Linux.
 
