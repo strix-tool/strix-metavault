@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+# Strix MetaVault — Linux launcher.
+# Locates the application and runs it with python3, with clear diagnostics if a
+# runtime dependency is missing. Works both from a repo checkout and from an
+# installed location (/opt, ~/.local/share, /usr/local/share).
+set -euo pipefail
+
+find_app_dir() {
+    # 1) explicit override
+    if [ -n "${STRIX_METAVAULT_HOME:-}" ] && [ -f "${STRIX_METAVAULT_HOME}/StrixMetaVault.py" ]; then
+        printf '%s\n' "${STRIX_METAVAULT_HOME}"; return 0
+    fi
+    # 2) relative to this script (repo checkout: linux/ -> repo root)
+    local self here d
+    self="$(readlink -f "$0" 2>/dev/null || printf '%s' "$0")"
+    here="$(dirname "$self")"
+    for d in "$here" "$here/.." "$here/../.."; do
+        if [ -f "$d/StrixMetaVault.py" ]; then (cd "$d" && pwd); return 0; fi
+    done
+    # 3) standard install locations
+    for d in /opt/strix-metavault "$HOME/.local/share/strix-metavault" /usr/local/share/strix-metavault; do
+        if [ -f "$d/StrixMetaVault.py" ]; then printf '%s\n' "$d"; return 0; fi
+    done
+    return 1
+}
+
+PY="$(command -v python3 || true)"
+if [ -z "$PY" ]; then
+    echo "strix-metavault: python3 not found. Install it: sudo apt install python3 python3-tk" >&2
+    exit 1
+fi
+if ! "$PY" -c 'import tkinter' >/dev/null 2>&1; then
+    echo "strix-metavault: Python 'tkinter' is missing. Install it: sudo apt install python3-tk" >&2
+    exit 1
+fi
+
+APPDIR="$(find_app_dir)" || {
+    echo "strix-metavault: could not locate StrixMetaVault.py." >&2
+    echo "Set STRIX_METAVAULT_HOME to the folder that contains it." >&2
+    exit 1
+}
+exec "$PY" "$APPDIR/StrixMetaVault.py" "$@"

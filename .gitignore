@@ -1,0 +1,37 @@
+# --- Build output ---
+build/
+dist/
+*.deb
+*.AppImage
+*.exe
+*.zip
+
+# --- PyInstaller ---
+*.spec.bak
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# --- Environments ---
+.venv/
+venv/
+env/
+
+# --- Editors / OS ---
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+
+# --- App runtime (never commit) ---
+tools/
+*.log
+
+# Installers & analysis artifacts (published via GitHub Releases; never committed)
+*.msi
+/*.spec
+bin/
+obj/
+.sonarqube/
+.scannerwork/

@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=Strix MetaVault
+GenericName=Metadata Remover & Encrypted Archiver
+Comment=Strip metadata and pack files into an AES-256 encrypted archive
+Exec=strix-metavault
+Icon=strix-metavault
+Terminal=false
+Categories=Utility;Security;Archiving;
+Keywords=metadata;exif;gps;privacy;encrypt;aes;7zip;archive;anonymize;
+StartupNotify=true

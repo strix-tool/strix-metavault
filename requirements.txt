@@ -1,0 +1,5 @@
+# Strix MetaVault runtime Python dependencies.
+# On Ubuntu prefer the distro packages (python3-pikepdf, python3-tk) — see linux/README.md.
+pikepdf>=8
+# Optional: drag-and-drop support in the GUI
+# tkinterdnd2>=0.3
